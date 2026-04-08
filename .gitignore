@@ -1,0 +1,34 @@
+# Data files
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+env.bak/
+venv.bak/
+
+# Virtual environment (named after project)
+us-census-corr-env/
+
+# Quarto / outputs
+/.quarto/
+_output/
+*.html
+*.pdf
+*.docx
+
+# Environment
+.env
+.DS_Store
+Thumbs.db
+
+**/*.quarto_ipynb

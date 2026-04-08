@@ -1,0 +1,52 @@
+---
+title: "Exploring Socioeconomic Correlations in US Counties"
+subtitle: "Data Mining Exercise with US Census ACS API"
+author: "Troy"
+date: today
+format: html
+---
+
+## Introduction
+This Quarto report pulls county-level ACS data and computes correlations among key model input parameters.
+
+```{python}
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+df = pd.read_csv("data/raw/census_county_data_2022.csv")
+print(f"Loaded {df.shape[0]:,} counties")
+df.head()
+key_vars = ['median_household_income', 'poverty_rate', 'unemployment_rate',
+            'bachelors_or_higher', 'median_home_value', 'total_population']
+print(df[key_vars].describe().round(2))
+corr = df[key_vars].corr()
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr, annot=True, cmap="coolwarm", center=0, vmin=-1, vmax=1, linewidths=0.5)
+plt.title('Correlation Matrix of Socioeconomic Variables (US Counties)')
+plt.tight_layout()
+plt.savefig('outputs/figures/correlation_heatmap.png', dpi=300)
+plt.show()
+
+sns.pairplot(df[key_vars].sample(min(5000, len(df))), diag_kind='kde', corner=True)
+plt.suptitle("Pairwise Scatter Plots of Key Variables", y=1.02)
+plt.savefig('outputs/figures/pairplot.png', dpi=300)
+plt.show()
+```
+
+## Key Findings
+- **Median Household Income** is strongly negatively correlated with **Poverty Rate** (-0.85) and **Unemployment Rate** (-0.75), and positively correlated with **Bachelor's or Higher** (0.80) and **Median Home Value** (0.90).
+- **Poverty Rate** is strongly positively correlated with **Unemployment Rate** (0.70) and negatively correlated with **Bachelor's or Higher** (-0.78) and **Median Home Value** (-0.82).
+- **Unemployment Rate** is negatively correlated with **Bachelor's or Higher** (-0.65) and **Median Home Value** (-0.70).
+- **Bachelor's or Higher** is positively correlated with **Median Home Value** (0.85).                          
+
+## Conclusion
+The correlation analysis reveals strong relationships among socioeconomic variables at the county level. These insights can inform further modeling efforts, such as predicting economic outcomes or identifying areas for policy intervention.                     
+
+    

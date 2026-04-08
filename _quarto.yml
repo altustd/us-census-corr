@@ -1,0 +1,21 @@
+project:
+  type: default
+  output-dir: _output
+  render:
+    - "*.qmd"
+
+title: "US Census Correlations – Socioeconomic Data Mining"
+
+execute:
+  echo: true
+  warning: false
+  message: false
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    code-tools: true
+    fig-width: 10
+    fig-height: 8
