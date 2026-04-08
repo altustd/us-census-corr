@@ -1,4 +1,4 @@
-# Data files
+# Data files (raw data stays local)
 data/raw/*
 data/processed/*
 !data/raw/.gitkeep
@@ -16,19 +16,17 @@ env/
 env.bak/
 venv.bak/
 
-# Virtual environment (named after project)
+# Virtual environment
 us-census-corr-env/
-
-# Quarto / outputs
-/.quarto/
-_output/
-*.html
-*.pdf
-*.docx
 
 # Environment
 .env
 .DS_Store
 Thumbs.db
 
+# Old Quarto output (we're switching to docs/)
+_output/
+.quarto/
+
+/.quarto/
 **/*.quarto_ipynb
